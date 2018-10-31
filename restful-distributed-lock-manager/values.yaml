@@ -9,7 +9,7 @@ rdlm:
       app: rdlm
     container:
       name: rdlm
-      image: stakater/restful-distributed-lock-manager
+      imageName: stakater/restful-distributed-lock-manager
       imageTag: 0.5.3
       port: 8080
       targetPort: 8888
