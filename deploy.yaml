@@ -1,0 +1,53 @@
+---
+# Source: restful-distributed-lock-manager/templates/service.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: restful-distributed-lock-manager
+    group: com.stakater.platform
+    provider: stakater
+    version: "0.5.3"
+    chart: "restful-distributed-lock-manager-1.0.1"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: restful-distributed-lock-manager
+spec:
+  selector:
+    app: rdlm
+    
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8888
+---
+# Source: restful-distributed-lock-manager/templates/deployment.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: restful-distributed-lock-manager
+    group: com.stakater.platform
+    provider: stakater
+    version: "0.5.3"
+    chart: "restful-distributed-lock-manager-1.0.1"
+    release: "RELEASE-NAME"
+    heritage: "Tiller"
+  name: restful-distributed-lock-manager
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: rdlm
+        
+    spec:
+      containers:
+      - name: rdlm        
+        image: ":0.5.3"
+        ports:
+        - containerPort: 8888
+          name: http
+          protocol: TCP

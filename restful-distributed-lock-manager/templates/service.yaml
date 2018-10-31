@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+{{ include "rdlm.labels.stakater" . | indent 4 }}
+{{ include "rdlm.labels.chart" . | indent 4 }}
+  name: {{ template "rdlm.name" . }}
+spec:
+  selector:
+{{ toYaml .Values.rdlm.deployment.podLabels | indent 4 }}
+  ports:
+  - name: http
+    port: {{ .Values.rdlm.deployment.container.port }}
+    protocol: TCP
+    targetPort: {{ .Values.rdlm.deployment.container.targetPort }}
