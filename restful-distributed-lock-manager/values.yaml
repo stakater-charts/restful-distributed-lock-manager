@@ -5,8 +5,7 @@ rdlm:
     version: 0.5.3
   deployment:
     replicas: 1
-    podLabels:      
-      app: rdlm
+    podLabels: {}
     container:
       name: rdlm
       imageName: stakater/restful-distributed-lock-manager

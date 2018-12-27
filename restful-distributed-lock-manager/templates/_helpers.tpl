@@ -8,17 +8,10 @@ Expand the name of the chart.
 
 {{- define "rdlm.labels.selector" -}}
 app: {{ template "rdlm.name" . }}
-group: {{ .Values.rdlm.labels.group }}
-provider: {{ .Values.rdlm.labels.provider }}
-{{- end -}}
-
-{{- define "rdlm.labels.stakater" -}}
-{{ template "rdlm.labels.selector" . }}
-version: "{{ .Values.rdlm.labels.version }}"
+release: {{ .Release.Name | quote }}
 {{- end -}}
 
 {{- define "rdlm.labels.chart" -}}
 chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-release: {{ .Release.Name | quote }}
 heritage: {{ .Release.Service | quote }}
 {{- end -}}
